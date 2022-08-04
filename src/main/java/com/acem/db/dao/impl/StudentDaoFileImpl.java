@@ -4,8 +4,11 @@ import com.acem.db.dao.StudentDao;
 import com.acem.db.model.Student;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -24,12 +27,8 @@ public class StudentDaoFileImpl implements StudentDao {
                 if (line.length() > 1) {
                     String token[] = line.split(",");
                     if (token != null) {
-                        studentList.add(new Student(
-                                token[0] != null ? Long.parseLong(token[0]) : null,
-                                token[1] != null && !token[1].isEmpty() ?  token[1] : null,
-                                token[2] != null && !token[1].isEmpty() ?  token[1] : null,
-                                token[3] != null && !token[1].isEmpty() ?  token[1] : null
-                        ));
+
+                        studentList.add(new Student(token[0] != null ? Long.parseLong(token[0]) : null, token[1] != null && !token[1].isEmpty() ? token[1] : null, token[2] != null && !token[2].isEmpty() ? token[2] : null, token[3] != null && !token[3].isEmpty() ? token[3] : null));
                     }
                 }
             }
@@ -40,7 +39,6 @@ public class StudentDaoFileImpl implements StudentDao {
 
     @Override
     public Optional<List<Student>> getAll() {
-
         return Optional.of(studentList);
     }
 
@@ -62,6 +60,14 @@ public class StudentDaoFileImpl implements StudentDao {
     @Override
     public Boolean save(Student student) {
         try {
+            try {
+                BufferedWriter bw = new BufferedWriter(new FileWriter("students.txt", true));
+                String line = String.format("%s,%s,%s,%s,%s", student.getId().toString(), student.getName(), student.getEmail(), student.getContactNo());
+                bw.append(line);
+                bw.close();
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
             studentList.add(student);
             // Add a code to insert a new Student line in the file
             return true;
@@ -98,10 +104,7 @@ public class StudentDaoFileImpl implements StudentDao {
             Optional<Student> optionalStudent = getById(id);
             if (optionalStudent.isPresent()) {
                 Student memoryStudent = optionalStudent.get();
-                studentList = studentList
-                        .stream()
-                        .filter(student -> student.getId().compareTo(memoryStudent.getId()) != 0)
-                        .collect(Collectors.toList());
+                studentList = studentList.stream().filter(student -> student.getId().compareTo(memoryStudent.getId()) != 0).collect(Collectors.toList());
 
                 // Add a code to delete an existing Student line in the file
                 return true;
