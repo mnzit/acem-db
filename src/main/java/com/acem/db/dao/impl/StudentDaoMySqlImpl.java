@@ -97,12 +97,84 @@ public class StudentDaoMySqlImpl implements StudentDao {
 
     @Override
     public Optional<Student> getByEmailAddress(String emailAddress) {
-        return null;
+
+        Connection connection = null;
+        Statement statement = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            String url = "jdbc:mysql://localhost:3306/COLLEGE";
+            String username = "root";
+            String password = "Root@12345";
+            connection = DriverManager.getConnection(url, username, password);
+            statement = connection.createStatement();
+            String sql = "SELECT * FROM STUDENTS WHERE EMAIL = " + emailAddress;
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                Student student = new Student();
+
+                student.setId(resultSet.getLong("ID"));
+                student.setName(resultSet.getString("NAME"));
+                student.setEmail(resultSet.getString("EMAIL"));
+                student.setContactNo(resultSet.getString("CONTACT_NO"));
+
+                return Optional.of(student);
+            }
+
+            return Optional.empty();
+        } catch (Exception ex) {
+            System.out.println("Exception: " + ex);
+            return Optional.empty();
+        } finally {
+            try {
+                if (connection != null && !connection.isClosed()) {
+                    connection.close();
+                }
+            } catch (Exception ex) {
+                System.out.println("Exception: " + ex);
+            }
+        }
     }
 
     @Override
     public Optional<Student> getByContactNo(String contactNo) {
-        return null;
+
+        Connection connection = null;
+        Statement statement = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            String url = "jdbc:mysql://localhost:3306/COLLEGE";
+            String username = "root";
+            String password = "Root@12345";
+            connection = DriverManager.getConnection(url, username, password);
+            statement = connection.createStatement();
+            String sql = "SELECT * FROM STUDENTS WHERE CONTACT_NO = " + contactNo;
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                Student student = new Student();
+
+                student.setId(resultSet.getLong("ID"));
+                student.setName(resultSet.getString("NAME"));
+                student.setEmail(resultSet.getString("EMAIL"));
+                student.setContactNo(resultSet.getString("CONTACT_NO"));
+
+                return Optional.of(student);
+            }
+
+            return Optional.empty();
+        } catch (Exception ex) {
+            System.out.println("Exception: " + ex);
+            return Optional.empty();
+        } finally {
+            try {
+                if (connection != null && !connection.isClosed()) {
+                    connection.close();
+                }
+            } catch (Exception ex) {
+                System.out.println("Exception: " + ex);
+            }
+        }
     }
 
     @Override
