@@ -3,9 +3,8 @@ package com.acem.db.dao.impl;
 import com.acem.db.dao.StudentDao;
 import com.acem.db.mapper.impl.StudentRowMapperImpl;
 import com.acem.db.model.Student;
-import com.acem.db.util.CodeWrapper;
 import com.acem.db.util.DbUtil;
-import com.acem.db.util.ExceptionHandler;
+import com.acem.db.exception.ExceptionHandler;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;

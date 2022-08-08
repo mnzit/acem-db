@@ -1,16 +1,19 @@
-package com.acem.db.util;
+package com.acem.db.exception;
+
+import com.acem.db.exception.wrapper.StatementWrapper;
+import com.acem.db.exception.wrapper.ReturnableStatementWrapper;
 
 public class ExceptionHandler {
 
-    public static void handle(CodeWrapper codeWrapper) {
+    public static void handle(StatementWrapper statementWrapper) {
         try {
-            codeWrapper.execute();
+            statementWrapper.execute();
         } catch (Exception ex) {
             System.out.println("Exception: " + ex);
         }
     }
 
-    public static void handle(CodeWrapper tryWrapper, CodeWrapper finallyWrapper) {
+    public static void handle(StatementWrapper tryWrapper, StatementWrapper finallyWrapper) {
         try {
             tryWrapper.execute();
         } catch (Exception ex) {
@@ -25,7 +28,7 @@ public class ExceptionHandler {
     }
 
 
-    public static <T> T handle(ReturnableCodeWrapper<T> tryWrapper, CodeWrapper finallyWrapper, T fallBackObject) {
+    public static <T> T handle(ReturnableStatementWrapper<T> tryWrapper, StatementWrapper finallyWrapper, T fallBackObject) {
         try {
             return tryWrapper.execute();
         } catch (Exception ex) {
@@ -40,23 +43,23 @@ public class ExceptionHandler {
         }
     }
 
-    public static <T> T handle(ReturnableCodeWrapper<T> tryWrapper, CodeWrapper finallyWrapper) {
+    public static <T> T handle(ReturnableStatementWrapper<T> tryWrapper, StatementWrapper finallyWrapper) {
         return handle(tryWrapper, finallyWrapper, null);
     }
 
 
-    public <T> T handle(ReturnableCodeWrapper<T> returnableCodeWrapper) {
+    public <T> T handle(ReturnableStatementWrapper<T> returnableStatementWrapper) {
         try {
-            return returnableCodeWrapper.execute();
+            return returnableStatementWrapper.execute();
         } catch (Exception ex) {
             System.out.println("Exception: " + ex);
             return null;
         }
     }
 
-    public <T> T handle(ReturnableCodeWrapper<T> returnableCodeWrapper, T fallBackObject) {
+    public <T> T handle(ReturnableStatementWrapper<T> returnableStatementWrapper, T fallBackObject) {
         try {
-            return returnableCodeWrapper.execute();
+            return returnableStatementWrapper.execute();
         } catch (Exception ex) {
             System.out.println("Exception: " + ex);
             return fallBackObject;
