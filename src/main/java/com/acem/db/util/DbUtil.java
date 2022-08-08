@@ -45,14 +45,17 @@ public class DbUtil {
         }
     }
 
-    public <T> List<T> executeAndMap(RowMapper<T> rowMapper) throws Exception {
-        ResultSet resultSet = executeQuery();
+    public <T> List<T> map(ResultSet resultSet, RowMapper<T> rowMapper) throws Exception {
         List<T> objects = new ArrayList<>();
         while (resultSet.next()) {
             T object = rowMapper.map(resultSet);
             objects.add(object);
         }
         return objects;
+    }
+
+    public <T> List<T> executeAndMap(RowMapper<T> rowMapper) throws Exception {
+        return map(executeQuery(), rowMapper);
     }
 
     public void mapValue(Object... args) throws Exception {
@@ -62,7 +65,7 @@ public class DbUtil {
         }
     }
 
-    public <T> List<T> execute(String sql, RowMapper<T> mapper) throws Exception{
+    public <T> List<T> execute(String sql, RowMapper<T> mapper) throws Exception {
         connectAndInit(sql);
         return executeAndMap(mapper);
     }
