@@ -37,21 +37,21 @@ public class StudentDaoMySqlImpl implements StudentDao {
     public Optional<Student> getById(Long id) {
         DbUtil dbUtil = new DbUtil();
 
-        return ExceptionHandler.handle(()->{
-                dbUtil.connect();
+        return ExceptionHandler.handle(() -> {
+                    dbUtil.connect();
 
-                String sql = "SELECT * FROM STUDENTS WHERE ID = ?";
-                dbUtil.init(sql);
-                dbUtil.mapValue(id);
-                ResultSet resultSet = dbUtil.executeQuery();
-                while (resultSet.next()) {
-                    Student student = new StudentRowMapperImpl().map(resultSet);
-                    return Optional.of(student);
-                }
-                return Optional.empty();
-        },
-                ()->ExceptionHandler.handle(dbUtil::close)
-                ,Optional.empty()
+                    String sql = "SELECT * FROM STUDENTS WHERE ID = ?";
+                    dbUtil.init(sql);
+                    dbUtil.mapValue(id);
+                    ResultSet resultSet = dbUtil.executeQuery();
+                    while (resultSet.next()) {
+                        Student student = new StudentRowMapperImpl().map(resultSet);
+                        return Optional.of(student);
+                    }
+                    return Optional.empty();
+                },
+                () -> ExceptionHandler.handle(dbUtil::close)
+                , Optional.empty()
         );
 
     }
@@ -61,7 +61,7 @@ public class StudentDaoMySqlImpl implements StudentDao {
     public Optional<Student> getByEmailAddress(String emailAddress) {
         DbUtil dbUtil = new DbUtil();
 
-        return ExceptionHandler.handle(()->{
+        return ExceptionHandler.handle(() -> {
                     dbUtil.connect();
 
                     String sql = "SELECT * FROM STUDENTS WHERE EMAIL = ?";
@@ -76,9 +76,9 @@ public class StudentDaoMySqlImpl implements StudentDao {
                     }
 
                     return Optional.empty();
-        },
-                ()->ExceptionHandler.handle(dbUtil::close)
-                ,Optional.empty()
+                },
+                () -> ExceptionHandler.handle(dbUtil::close)
+                , Optional.empty()
         );
 
     }
@@ -87,7 +87,7 @@ public class StudentDaoMySqlImpl implements StudentDao {
     public Optional<Student> getByContactNo(String contactNo) {
         DbUtil dbUtil = new DbUtil();
 
-        return ExceptionHandler.handle(()->{
+        return ExceptionHandler.handle(() -> {
                     dbUtil.connect();
 
                     String sql = "SELECT * FROM STUDENTS WHERE CONTACT_NO = ?";
@@ -102,9 +102,9 @@ public class StudentDaoMySqlImpl implements StudentDao {
                     }
 
                     return Optional.empty();
-        },
-                ()->ExceptionHandler.handle(dbUtil::close)
-                ,Optional.empty()
+                },
+                () -> ExceptionHandler.handle(dbUtil::close)
+                , Optional.empty()
         );
 
     }
