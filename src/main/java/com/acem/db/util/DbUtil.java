@@ -1,6 +1,9 @@
 package com.acem.db.util;
 
 import com.acem.db.constant.DbConstant;
+import com.acem.db.credential.DbCredential;
+import com.acem.db.credential.impl.DbCredentialDotEnvImpl;
+import com.acem.db.credential.impl.DbCredentialFileImpl;
 import com.acem.db.mapper.RowMapper;
 import com.acem.db.mapper.impl.StudentRowMapperImpl;
 import com.acem.db.model.Student;
@@ -17,9 +20,21 @@ public class DbUtil {
     private Connection connection;
     private PreparedStatement statement;
 
+    private DbCredential dbCredential;
+
+
+    public DbUtil(DbCredential dbCredential) {
+        this.dbCredential = dbCredential;
+    }
+
+    public DbUtil(){
+        this.dbCredential = new DbCredentialDotEnvImpl();
+    }
+
     public void connect() throws Exception {
+        String url = "jdbc:mysql://" + dbCredential.getIpAddress() + ":" + dbCredential.getPort() + "/" + dbCredential.getName();
         Class.forName("com.mysql.cj.jdbc.Driver");
-        connection = DriverManager.getConnection(DbConstant.URL, DbConstant.USERNAME, DbConstant.PASSWORD);
+        connection = DriverManager.getConnection(url, dbCredential.getUsername(), dbCredential.getPassword());
     }
 
     public void init(String sql) throws Exception {
