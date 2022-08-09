@@ -82,7 +82,7 @@ public class DbConnector {
     public void mapValue(Object... args) throws Exception {
         int noOfArgs = args.length;
         for (int i = 0; i < noOfArgs; i++) {
-            statement.setObject(i + 1, args[0]);
+            statement.setObject(i + 1, args[i]);
         }
     }
 
