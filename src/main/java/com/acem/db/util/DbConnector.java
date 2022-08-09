@@ -1,12 +1,8 @@
 package com.acem.db.util;
 
-import com.acem.db.constant.DbConstant;
 import com.acem.db.credential.DbCredential;
 import com.acem.db.credential.impl.DbCredentialDotEnvImpl;
-import com.acem.db.credential.impl.DbCredentialFileImpl;
 import com.acem.db.mapper.RowMapper;
-import com.acem.db.mapper.impl.StudentRowMapperImpl;
-import com.acem.db.model.Student;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,19 +11,17 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DbUtil {
+public class DbConnector {
 
     private Connection connection;
     private PreparedStatement statement;
-
     private DbCredential dbCredential;
 
-
-    public DbUtil(DbCredential dbCredential) {
+    public DbConnector(DbCredential dbCredential) {
         this.dbCredential = dbCredential;
     }
 
-    public DbUtil(){
+    public DbConnector() {
         this.dbCredential = new DbCredentialDotEnvImpl();
     }
 
@@ -69,8 +63,20 @@ public class DbUtil {
         return objects;
     }
 
+    public <T> T mapSingle(ResultSet resultSet, RowMapper<T> rowMapper) throws Exception {
+        while (resultSet.next()) {
+            T object = rowMapper.map(resultSet);
+            return object;
+        }
+        return null;
+    }
+
     public <T> List<T> executeAndMap(RowMapper<T> rowMapper) throws Exception {
         return map(executeQuery(), rowMapper);
+    }
+
+    public <T> T executeAndMapSingle(RowMapper<T> rowMapper) throws Exception {
+        return mapSingle(executeQuery(), rowMapper);
     }
 
     public void mapValue(Object... args) throws Exception {
@@ -83,5 +89,23 @@ public class DbUtil {
     public <T> List<T> execute(String sql, RowMapper<T> mapper) throws Exception {
         connectAndInit(sql);
         return executeAndMap(mapper);
+    }
+
+    public <T> List<T> execute(String sql, RowMapper<T> mapper, Object... args) throws Exception {
+        connectAndInit(sql);
+        mapValue(args);
+        return executeAndMap(mapper);
+    }
+
+    public <T> T executeSingle(String sql, RowMapper<T> mapper, Object... args) throws Exception {
+        connectAndInit(sql);
+        mapValue(args);
+        return executeAndMapSingle(mapper);
+    }
+
+    public int execute(String sql, Object... args) throws Exception {
+        connectAndInit(sql);
+        mapValue(args);
+        return executeUpdate();
     }
 }
