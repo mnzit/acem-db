@@ -1,4 +1,4 @@
-package com.acem.db.util;
+package com.acem.db.config;
 
 public class JdbcTemplate {
 

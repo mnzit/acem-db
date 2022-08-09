@@ -5,7 +5,7 @@ import com.acem.db.dao.StudentDao;
 import com.acem.db.exception.ExceptionHandler;
 import com.acem.db.mapper.impl.StudentRowMapperImpl;
 import com.acem.db.model.Student;
-import com.acem.db.util.JdbcTemplate;
+import com.acem.db.config.JdbcTemplate;
 
 import java.util.List;
 import java.util.Optional;

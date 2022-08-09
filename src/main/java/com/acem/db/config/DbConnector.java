@@ -1,4 +1,4 @@
-package com.acem.db.util;
+package com.acem.db.config;
 
 import com.acem.db.credential.DbCredential;
 import com.acem.db.credential.impl.DbCredentialDotEnvImpl;
