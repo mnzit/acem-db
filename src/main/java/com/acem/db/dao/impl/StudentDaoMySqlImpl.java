@@ -36,96 +36,83 @@ public class StudentDaoMySqlImpl implements StudentDao {
     @Override
     public Optional<Student> getById(Long id) {
         DbUtil dbUtil = new DbUtil();
-        try {
-            dbUtil.connect();
 
-            String sql = "SELECT * FROM STUDENTS WHERE ID = ?";
-            dbUtil.init(sql);
-            dbUtil.mapValue(id);
-            ResultSet resultSet = dbUtil.executeQuery();
-            while (resultSet.next()) {
-                Student student = new StudentRowMapperImpl().map(resultSet);
-                return Optional.of(student);
-            }
+        return ExceptionHandler.handle(()->{
+                dbUtil.connect();
 
-            return Optional.empty();
+                String sql = "SELECT * FROM STUDENTS WHERE ID = ?";
+                dbUtil.init(sql);
+                dbUtil.mapValue(id);
+                ResultSet resultSet = dbUtil.executeQuery();
+                while (resultSet.next()) {
+                    Student student = new StudentRowMapperImpl().map(resultSet);
+                    return Optional.of(student);
+                }
+                return Optional.empty();
+        },
+                ()->ExceptionHandler.handle(dbUtil::close)
+                ,Optional.empty()
+        );
 
-        } catch (Exception ex) {
-            System.out.println("Exception: " + ex);
-            return Optional.empty();
-        } finally {
-            try {
-                dbUtil.close();
-            } catch (Exception ex) {
-                System.out.println("Exception: " + ex);
-            }
-        }
     }
 
 
     @Override
     public Optional<Student> getByEmailAddress(String emailAddress) {
         DbUtil dbUtil = new DbUtil();
-        try {
-            dbUtil.connect();
 
-            String sql = "SELECT * FROM STUDENTS WHERE EMAIL = ?";
-            dbUtil.init(sql);
-            dbUtil.mapValue(emailAddress);
+        return ExceptionHandler.handle(()->{
+                    dbUtil.connect();
 
-            ResultSet resultSet = dbUtil.executeQuery();
+                    String sql = "SELECT * FROM STUDENTS WHERE EMAIL = ?";
+                    dbUtil.init(sql);
+                    dbUtil.mapValue(emailAddress);
 
-            while (resultSet.next()) {
-                Student student = new StudentRowMapperImpl().map(resultSet);
-                return Optional.of(student);
-            }
+                    ResultSet resultSet = dbUtil.executeQuery();
 
-            return Optional.empty();
-        } catch (Exception ex) {
-            System.out.println("Exception: " + ex);
-            return Optional.empty();
-        } finally {
-            try {
-                dbUtil.close();
-            } catch (Exception ex) {
-                System.out.println("Exception: " + ex);
-            }
-        }
+                    while (resultSet.next()) {
+                        Student student = new StudentRowMapperImpl().map(resultSet);
+                        return Optional.of(student);
+                    }
+
+                    return Optional.empty();
+        },
+                ()->ExceptionHandler.handle(dbUtil::close)
+                ,Optional.empty()
+        );
+
     }
 
     @Override
     public Optional<Student> getByContactNo(String contactNo) {
         DbUtil dbUtil = new DbUtil();
-        try {
-            dbUtil.connect();
 
-            String sql = "SELECT * FROM STUDENTS WHERE CONTACT_NO = ?";
-            dbUtil.init(sql);
-            dbUtil.mapValue(contactNo);
+        return ExceptionHandler.handle(()->{
+                    dbUtil.connect();
 
-            ResultSet resultSet = dbUtil.executeQuery();
+                    String sql = "SELECT * FROM STUDENTS WHERE CONTACT_NO = ?";
+                    dbUtil.init(sql);
+                    dbUtil.mapValue(contactNo);
 
-            while (resultSet.next()) {
-                Student student = new StudentRowMapperImpl().map(resultSet);
-                return Optional.of(student);
-            }
+                    ResultSet resultSet = dbUtil.executeQuery();
 
-            return Optional.empty();
-        } catch (Exception ex) {
-            System.out.println("Exception: " + ex);
-            return Optional.empty();
-        } finally {
-            try {
-                dbUtil.close();
-            } catch (Exception ex) {
-                System.out.println("Exception: " + ex);
-            }
-        }
+                    while (resultSet.next()) {
+                        Student student = new StudentRowMapperImpl().map(resultSet);
+                        return Optional.of(student);
+                    }
+
+                    return Optional.empty();
+        },
+                ()->ExceptionHandler.handle(dbUtil::close)
+                ,Optional.empty()
+        );
+
     }
 
     @Override
     public Boolean save(Student student) {
         DbUtil dbUtil = new DbUtil();
+
         try {
             dbUtil.connect();
 
