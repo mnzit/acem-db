@@ -27,6 +27,7 @@ public class DbConnector {
 
     public void connect() throws Exception {
         String url = "jdbc:mysql://" + dbCredential.getIpAddress() + ":" + dbCredential.getPort() + "/" + dbCredential.getName();
+        url += "?useSSL=false&allowPublicKeyRetrieval=true";
         Class.forName("com.mysql.cj.jdbc.Driver");
         connection = DriverManager.getConnection(url, dbCredential.getUsername(), dbCredential.getPassword());
     }
