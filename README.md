@@ -25,3 +25,10 @@ NAME=COLLEGE
 USERNAME=root
 PASSWORD=<YOUR_PASSWORD>
 ```
+
+> Package and deploy to payara micro server
+
+```
+mvn clean package && java -jar payara-micro.jar --deploy target/*.war --nocluster
+
+```
