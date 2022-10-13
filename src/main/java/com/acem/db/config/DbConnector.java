@@ -15,7 +15,7 @@ public class DbConnector {
 
     private Connection connection;
     private PreparedStatement statement;
-    private DbCredential dbCredential;
+    private final DbCredential dbCredential;
 
     public DbConnector(DbCredential dbCredential) {
         this.dbCredential = dbCredential;

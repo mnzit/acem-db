@@ -32,3 +32,5 @@ PASSWORD=<YOUR_PASSWORD>
 mvn clean package && java -jar payara-micro.jar --deploy target/*.war --nocluster
 
 ```
+
+> Postman collection link: https://www.getpostman.com/collections/d6ac7c9e1ceae06c3921

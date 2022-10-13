@@ -14,8 +14,6 @@ public class Main {
 
         Optional<List<Student>> students = studentDao.getAll();
 
-        if (students.isPresent()) {
-            students.get().stream().forEach(System.out::println);
-        }
+        students.ifPresent(studentList -> studentList.stream().forEach(System.out::println));
     }
 }
