@@ -1,7 +1,10 @@
 package com.acem.db.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.io.Serializable;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Response implements Serializable {
 
     private Integer statusCode;
@@ -9,6 +12,8 @@ public class Response implements Serializable {
     private String description;
 
     private Object data;
+
+    private Object error;
 
     public Integer getStatusCode() {
         return statusCode;
@@ -43,6 +48,15 @@ public class Response implements Serializable {
 
     public Response data(Object data) {
         this.data = data;
+        return this;
+    }
+
+    public Object getError() {
+        return error;
+    }
+
+    public Response error(Object error) {
+        this.error = error;
         return this;
     }
 }

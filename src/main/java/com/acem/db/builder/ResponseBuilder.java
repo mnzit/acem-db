@@ -43,4 +43,19 @@ public class ResponseBuilder {
                 .statusCode(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
     }
 
+    public static Response invalidPathParameter() {
+        return new Response()
+                .success(false)
+                .description(ResponseMessageConstant.INVALID_PATH_PARAMETER)
+                .statusCode(HttpServletResponse.SC_BAD_REQUEST);
+    }
+
+    public static Response validationFailed(Object error) {
+        return new Response()
+                .success(false)
+                .error(error)
+                .description(ResponseMessageConstant.INVALID_REQUEST_BODY)
+                .statusCode(HttpServletResponse.SC_BAD_REQUEST);
+    }
+
 }

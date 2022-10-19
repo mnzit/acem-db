@@ -1,7 +1,6 @@
 package com.acem.db.model;
 
 public class Student {
-
     private Long id;
     private String name;
     private String email;

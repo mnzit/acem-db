@@ -66,11 +66,25 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Response update(Student student) {
-        return null;
+        Boolean isUpdated = studentDao.update(student);
+        Response responseBody = null;
+        if (isUpdated) {
+            responseBody = ResponseBuilder.success(ResponseMessageConstant.Student.UPDATED);
+        } else {
+            responseBody = ResponseBuilder.failure(ResponseMessageConstant.Student.NOT_UPDATED);
+        }
+        return responseBody;
     }
 
     @Override
     public Response delete(Long id) {
-        return null;
+        Boolean isDeleted = studentDao.delete(id);
+        Response responseBody = null;
+        if (isDeleted) {
+            responseBody = ResponseBuilder.success(ResponseMessageConstant.Student.DELETED);
+        } else {
+            responseBody = ResponseBuilder.failure(ResponseMessageConstant.Student.NOT_DELETED);
+        }
+        return responseBody;
     }
 }
