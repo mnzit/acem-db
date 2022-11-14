@@ -3,6 +3,7 @@ package com.acem.db.service.impl;
 import com.acem.db.builder.ResponseBuilder;
 import com.acem.db.constant.ResponseMessageConstant;
 import com.acem.db.dao.StudentDao;
+import com.acem.db.dao.impl.StudentDaoHibernateImpl;
 import com.acem.db.dao.impl.StudentDaoMySqlImpl;
 import com.acem.db.model.Student;
 import com.acem.db.response.Response;
@@ -13,7 +14,7 @@ import java.util.Optional;
 
 public class StudentServiceImpl implements StudentService {
 
-    private static final StudentDao studentDao = new StudentDaoMySqlImpl();
+    private static final StudentDao studentDao = new StudentDaoHibernateImpl();
 
     @Override
     public Response getAll() {

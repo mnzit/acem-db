@@ -78,7 +78,7 @@ public class ExceptionHandler {
         }
     }
 
-    public <T> T handle(ReturnableStatementWrapper<T> returnableStatementWrapper, T fallBackObject) {
+    public static <T> T handle(ReturnableStatementWrapper<T> returnableStatementWrapper, T fallBackObject) {
         try {
             return returnableStatementWrapper.execute();
         } catch (Exception ex) {
