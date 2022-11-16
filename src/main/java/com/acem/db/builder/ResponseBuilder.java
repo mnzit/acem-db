@@ -3,7 +3,7 @@ package com.acem.db.builder;
 import com.acem.db.constant.ResponseMessageConstant;
 import com.acem.db.response.Response;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class ResponseBuilder {
 
