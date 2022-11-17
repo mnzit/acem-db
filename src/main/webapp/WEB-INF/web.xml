@@ -6,7 +6,7 @@
 
     <servlet>
         <servlet-name>student</servlet-name>
-        <servlet-class>com.acem.db.controller.StudentController</servlet-class>
+        <servlet-class>com.acem.demo.controller.StudentController</servlet-class>
     </servlet>
 
     <servlet-mapping>
