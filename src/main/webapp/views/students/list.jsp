@@ -7,6 +7,44 @@
 
 <h1>Students</h1>
 
+<script>
+    function fetchStudents() {
+        fetch("http://localhost:8080/api/v1/students")
+            .then(response => response.json())
+            .then(data => {
+
+                let list = data.data;
+                console.log(list);
+                let studentTableBody = document.getElementById("studentTableBody");
+                console.log(studentTableBody);
+                list.forEach((student) => {
+                    studentTableBody.appendChild(createRow(student));
+                })
+            })
+            .catch(err => console.error(err));
+    }
+
+    function createRow(data) {
+        let tr = document.createElement("tr");
+        let id = document.createElement("td");
+        id.innerText = data.id;
+        tr.appendChild(id);
+        let name = document.createElement("td");
+        name.innerText = data.name;
+        tr.appendChild(name);
+        let email = document.createElement("td");
+        email.innerText = data.email;
+        tr.appendChild(email);
+        let contactNo = document.createElement("td");
+        contactNo.innerText = data.contactNo;
+        tr.appendChild(contactNo);
+
+        return tr;
+    }
+</script>
+
+<button onclick="fetchStudents()">Fetch Students</button>
+
 <table>
     <thead>
     <tr>
@@ -16,15 +54,7 @@
         <th>Email</th>
     </tr>
     </thead>
-    <tbody>
-    <c:forEach var="student" items="${requestScope.students}">
-        <tr>
-            <td>${student.id}</td>
-            <td>${student.name}</td>
-            <td>${student.contactNo}</td>
-            <td>${student.email}</td>
-        </tr>
-    </c:forEach>
+    <tbody id="studentTableBody">
 
     </tbody>
 </table>
