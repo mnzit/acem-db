@@ -1,4 +1,4 @@
-package com.acem.demo.controller;
+package com.acem.demo.controller.api;
 
 import com.acem.demo.request.StudentSaveRequest;
 import com.acem.demo.request.mapper.StudentMapperUtil;
@@ -9,7 +9,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-@Path("v2/students")
+@Path("/v2/students")
 public class StudentV2Controller {
 
     @Inject
@@ -37,4 +37,5 @@ public class StudentV2Controller {
                 .entity(responseBody)
                 .build();
     }
+
 }

@@ -1,8 +1,9 @@
 package com.acem.demo.utils;
 
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
+import jakarta.validation.ValidatorFactory;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

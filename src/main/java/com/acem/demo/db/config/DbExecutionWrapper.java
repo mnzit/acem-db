@@ -1,4 +1,4 @@
-package com.acem.demo.config;
+package com.acem.demo.db.config;
 
 public interface DbExecutionWrapper<T> {
 

@@ -1,4 +1,4 @@
-package com.acem.demo.credential;
+package com.acem.demo.db.credential;
 
 public interface DbCredential {
 

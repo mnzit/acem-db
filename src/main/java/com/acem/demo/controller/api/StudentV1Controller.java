@@ -1,7 +1,8 @@
-package com.acem.demo.controller;
+package com.acem.demo.controller.api;
 
 import com.acem.demo.builder.ResponseBuilder;
 import com.acem.demo.constant.RegexConstant;
+import com.acem.demo.controller.Controller;
 import com.acem.demo.exception.ExceptionHandler;
 import com.acem.demo.request.StudentSaveRequest;
 import com.acem.demo.request.StudentUpdateRequest;
@@ -19,7 +20,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-public class StudentController extends Controller {
+public class StudentV1Controller extends Controller {
 
     @Inject
     private StudentService studentService;

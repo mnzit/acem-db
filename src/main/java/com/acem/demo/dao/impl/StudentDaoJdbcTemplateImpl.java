@@ -7,7 +7,7 @@ import com.acem.demo.dao.qualifer.DatasourceType;
 import com.acem.demo.exception.ExceptionHandler;
 import com.acem.demo.mapper.impl.StudentRowMapperImpl;
 import com.acem.demo.model.Student;
-import com.acem.demo.config.JdbcTemplate;
+import com.acem.demo.db.config.JdbcTemplate;
 import jakarta.enterprise.context.ApplicationScoped;
 
 import java.util.List;

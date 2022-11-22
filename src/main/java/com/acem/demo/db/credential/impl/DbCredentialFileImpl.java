@@ -1,6 +1,6 @@
-package com.acem.demo.credential.impl;
+package com.acem.demo.db.credential.impl;
 
-import com.acem.demo.credential.DbCredential;
+import com.acem.demo.db.credential.DbCredential;
 import com.acem.demo.exception.ExceptionHandler;
 
 import java.io.BufferedReader;

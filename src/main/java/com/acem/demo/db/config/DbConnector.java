@@ -1,7 +1,7 @@
-package com.acem.demo.config;
+package com.acem.demo.db.config;
 
-import com.acem.demo.credential.DbCredential;
-import com.acem.demo.credential.impl.DbCredentialDotEnvImpl;
+import com.acem.demo.db.credential.DbCredential;
+import com.acem.demo.db.credential.impl.DbCredentialFileImpl;
 import com.acem.demo.mapper.RowMapper;
 
 import java.sql.Connection;
@@ -22,7 +22,7 @@ public class DbConnector {
     }
 
     public DbConnector() {
-        this.dbCredential = new DbCredentialDotEnvImpl();
+        this.dbCredential = new DbCredentialFileImpl();
     }
 
     public void connect() throws Exception {
